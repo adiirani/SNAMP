@@ -18,6 +18,8 @@ Simple Neumorphic Audio and Music Player (SNAMP), is what it says it is. A simpl
     alt="Get it on GitHub"
     height="80">](https://github.com/adiirani/SNAMP/releases/tag/v0.0.1)
 
+Android: Available
+iOS: Coming Soon
 
 ## Acknowledgements & Credits
 
