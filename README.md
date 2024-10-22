@@ -13,7 +13,15 @@ Simple Neumorphic Audio and Music Player (SNAMP), is what it says it is. A simpl
 
 ## Screenshots
 
-[
+<p align="center">
+  <img src="./SNAMP_SCREENSHOTS_NOT_PART_OF_PROJECT/1.jpg" width="30%" />
+  <img src="./SNAMP_SCREENSHOTS_NOT_PART_OF_PROJECT/2.jpg" width="30%" />
+  <img src="./SNAMP_SCREENSHOTS_NOT_PART_OF_PROJECT/3.jpg" width="30%" />
+
+  <img src="./SNAMP_SCREENSHOTS_NOT_PART_OF_PROJECT/4.jpg" width="30%" />
+  <img src="./SNAMP_SCREENSHOTS_NOT_PART_OF_PROJECT/5.jpg" width="30%" />
+  <img src="./SNAMP_SCREENSHOTS_NOT_PART_OF_PROJECT/6.jpg" width="30%" />
+</p>
 
 ## Installation
 [<img src="https://github.com/machiav3lli/oandbackupx/blob/034b226cea5c1b30eb4f6a6f313e4dadcbb0ece4/badge_github.png"
