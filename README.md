@@ -14,13 +14,13 @@ Simple Neumorphic Audio and Music Player (SNAMP), is what it says it is. A simpl
 ## Screenshots
 
 <p align="center">
-  <img src="./SNAMP_SCREENSHOTS_NOT_PART_OF_PROJECT/1.jpg" width="30%" height="2197px"/>
-  <img src="./SNAMP_SCREENSHOTS_NOT_PART_OF_PROJECT/2.jpg" width="30%" height="2197px"/>
-  <img src="./SNAMP_SCREENSHOTS_NOT_PART_OF_PROJECT/3.jpg" width="30%" height="2197px"/>
+  <img src="./SNAMP_SCREENSHOTS_NOT_PART_OF_PROJECT/1.jpg" width="30%" height="800px"/>
+  <img src="./SNAMP_SCREENSHOTS_NOT_PART_OF_PROJECT/2.jpg" width="30%" height="800px"/>
+  <img src="./SNAMP_SCREENSHOTS_NOT_PART_OF_PROJECT/3.jpg" width="30%" height="800px"/>
 
-  <img src="./SNAMP_SCREENSHOTS_NOT_PART_OF_PROJECT/4.jpg" width="30%" height="2197px"/>
-  <img src="./SNAMP_SCREENSHOTS_NOT_PART_OF_PROJECT/5.jpg" width="30%" height="2197px"/>
-  <img src="./SNAMP_SCREENSHOTS_NOT_PART_OF_PROJECT/6.jpg" width="30%" height="2197px"/>
+  <img src="./SNAMP_SCREENSHOTS_NOT_PART_OF_PROJECT/4.jpg" width="30%" height="800px"/>
+  <img src="./SNAMP_SCREENSHOTS_NOT_PART_OF_PROJECT/5.jpg" width="30%" height="800px"/>
+  <img src="./SNAMP_SCREENSHOTS_NOT_PART_OF_PROJECT/6.jpg" width="30%" height="800px"/>
 </p>
 
 ## Installation
