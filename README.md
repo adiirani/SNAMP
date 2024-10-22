@@ -1,6 +1,6 @@
 
 
-<img src="https://socialify.git.ci/adiirani/SNAMP/image?description=1&descriptionEditable=Simple%20Neumorphic%20Audio%20and%20Music%20Player.&font=Source%20Code%20Pro&forks=1&logo=https%3A%2F%2Fraw.githubusercontent.com%2Fadiirani%2FSNAMP%2Frefs%2Fheads%2Fmain%2FSNAMP_SCREENSHOTS_NOT_PART_OF_PROJECT%2Fsnamp.png&name=1&owner=1&pattern=Charlie%20Brown&pulls=1&stargazers=1&theme=Auto" alt="SNAMP" width="640" height="320" />
+![SNAMP](https://socialify.git.ci/adiirani/SNAMP/image?description=1&descriptionEditable=Simple%20Neumorphic%20Audio%20and%20Music%20Player.&font=Source%20Code%20Pro&forks=1&logo=https%3A%2F%2Fraw.githubusercontent.com%2Fadiirani%2FSNAMP%2Frefs%2Fheads%2Fmain%2FSNAMP_SCREENSHOTS_NOT_PART_OF_PROJECT%2Fsnamp.png&name=1&owner=1&pattern=Charlie%20Brown&pulls=1&stargazers=1&theme=Auto)
 
 
 # SNAMP
