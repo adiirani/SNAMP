@@ -31,7 +31,7 @@ Simple Neumorphic Audio and Music Player (SNAMP), is what it says it is. A simpl
     height="80">](https://github.com/adiirani/SNAMP/releases/tag/v0.0.1)
 
 - Android: Available
-- iOS: Coming Soon
+- iOS: Available
 
 ## Acknowledgements & Credits
 
