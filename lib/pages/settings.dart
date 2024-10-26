@@ -1,3 +1,4 @@
+import 'package:SNAMP/models/musicauth.dart';
 import 'package:flutter/material.dart';
 import 'package:SNAMP/components/neumorphicboxthin.dart'; // Import the NeuThinBox
 import 'package:SNAMP/models/musicprovider.dart';
@@ -64,6 +65,65 @@ class _SettingsState extends State<Settings> {
               const SizedBox(height: 30), // Space between the rows
 
               // NeuThinBox around Clear Cache and Nuke Data rows
+              NeuThinBox(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: GestureDetector(
+                    onTap: () async {
+                      final cookies = await YTMusicAuthManager.getStoredCookies();
+                      if (cookies == null) {
+                        if (!mounted) return;
+                        
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => YTMusicAuth(
+                              onAuthSuccess: (cookies) {
+                                if (!mounted) return;
+                                
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(content: Text("Successfully signed in to YouTube Music")),
+                                );
+                                setState(() {}); // Refresh UI to update connection status
+                              },
+                            ),
+                          ),
+                        );
+                      } else {
+                        _showSignOutDialog(context);
+                      }
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          "YTM Account",
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        FutureBuilder<Map<String, String>?>(
+                          future: YTMusicAuthManager.getStoredCookies(),
+                          builder: (context, snapshot) {
+                            final bool isConnected = snapshot.hasData && snapshot.data != null;
+                            return Row(
+                              children: [
+                                Icon(
+                                  isConnected ? Icons.check : Icons.close,
+                                  color: isConnected ? Colors.green : Colors.red,
+                                  size:  20,
+                                  ),
+                                
+                              ],
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              
+              const SizedBox(height: 30),
+              
               NeuThinBox(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0), // Add padding around the column
@@ -176,4 +236,52 @@ class _SettingsState extends State<Settings> {
       },
     );
   }
+
+
+  void _showSignOutDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text("Sign Out"),
+        content: const Text("Are you sure you want to sign out of YouTube Music?"),
+        actions: <Widget>[
+          TextButton(
+            child: const Text("Cancel"),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+          TextButton(
+            child: const Text("Sign Out"),
+            onPressed: () async {
+              try {
+                final success = await YTMusicAuthManager.clearCookies();
+                if (!mounted) return;
+                
+                Navigator.of(context).pop();
+                
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(success 
+                      ? "Signed out of YouTube Music"
+                      : "Error signing out. Please try again."
+                    ),
+                  ),
+                );
+                
+                setState(() {}); // Refresh the UI to show disconnected state
+              } catch (e) {
+                if (!mounted) return;
+                
+                Navigator.of(context).pop();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Error signing out. Please try again.")),
+                );
+              }
+            },
+          ),
+        ],
+      );
+    },
+  );
+} 
 }

@@ -7,7 +7,7 @@ import 'dart:io';
 class CacheProvider {
   static const String cacheBoxName = 'caches';
   static const String cachePlaylistName = 'searchPlaylists';
-  static const int maxCacheSize = 100;
+  static const int maxCacheSize = 256;
 
   // Add a SearchCard to the cache
   Future<void> addTrack(SearchCard track) async {

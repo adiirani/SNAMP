@@ -1,6 +1,9 @@
 import 'dart:convert';
+import 'package:SNAMP/models/utils/sapisHashCalc.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
+import 'package:shared_preferences/shared_preferences.dart';
 
 const Map<String, String> WEB = {
   "client_name": "WEB",
@@ -44,6 +47,37 @@ const Map<String, String> filters = {
 class InnertubeProto {
   var continuation = '';
   var visitorData = 'CgswMTFJd3k3TzNDVSje_MC4BjIKCgJBRRIEGgAgQA%3D%3D'; //if this is b64 decodable im in trouble haha
+  String userCookies = '';
+  String sapis = '';
+
+  InnertubeProto() {
+    _initializeCookies();
+  }
+
+  // Initialize cookies asynchronously
+  Future<void> _initializeCookies() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      String? cookieData = prefs.getString("yt_music_auth_cookies");
+
+      if (cookieData != null) {
+        setUserCookies(cookieData);
+      } else {
+        print("No cookies found.");
+      }
+    } catch (e) {
+      print("Error initializing cookies: $e");
+    }
+  }
+
+  // Set cookies from JSON string
+
+  void setUserCookies(String cookieDict){
+    final userCookiesJson =  json.decode(cookieDict);
+    sapis = userCookiesJson["SAPISID"];
+    userCookies = userCookiesJson.entries.map((e) => '${e.key}=${e.value}').join('; ');
+    debugPrint(userCookies);
+  }
 
   Future<dynamic> search(String query, String filter) async {
     if (query == "" || filter == ""){
@@ -293,7 +327,17 @@ class InnertubeProto {
       'User-Agent': client['user_agent']!,
       "Accept-Encoding": "gzip, deflate",
       "Accept-Language": "en-US",
+      "X-Goog-Api-Format-Version": "1",
+      "X-origin": "https://music.youtube.com"
     };
+
+    if (userCookies != ''){
+      headers['Cookie'] = userCookies;
+      var sapisHash = await getSApiSidHash(sapis);
+      print(headers['Cookie']);
+      headers['Authorization'] = "SAPISIDHASH ${sapisHash}";
+      print(headers["Authorization"]);
+    }
 
     Map<String, dynamic> data = {
       "context": {
@@ -338,18 +382,13 @@ class InnertubeProto {
       print("INNERTUBE: $videoId FOUND!\n");
         return link;
       } else if (safe) {
-        visitorData = responseBody["responseContext"]["visitorData"];
-        if (responseBody['playabilityStatus']['reason'] == "Please sign in") {
-          print("INNERTUBE:RETRYING $videoId");
-          return await player(videoId, false);
-          
-        }
-        return null; // all options exhausted, return null. we will see a lot of this because i do not feel like writing a script to automatically reverse engineer their client decoder.
-      } else {
-        visitorData = '';
-        print("INNERTUBE: Trying $videoId with safe mode...");
-        return await player(videoId, true); // Recursive call with safe mode
-      }
+         return null; // all options exhausted, return null. we will see a lot of this because i do not feel like writing a script to automatically reverse engineer their client decoder.
+       } else {
+         visitorData = '';
+         print("INNERTUBE: Trying $videoId with safe mode...");
+         return await player(videoId, true); // Recursive call with safe mode
+       }
+         
     } else {
       print('Failed to fetch player data: ${response.statusCode}');
       print('Response body: ${response.body}');
